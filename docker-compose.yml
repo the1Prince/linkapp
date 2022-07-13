@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+
+ weby:
+  container_name: weby
+  build:
+   context: .
+  
+  ports:
+  - 8000:5000
+  
+  command: bash -c "flask db init && flask db migrate -m 'users table' && flask db upgrade && flask db migrate -m 'contact_group table' && flask db upgrade && flask db migrate -m 'contact table' && flask db upgrade && flask run --host=0.0.0.0"
+  
+  volumes:
+  - ./:/app
+
+ 
+

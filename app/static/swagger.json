@@ -1,0 +1,711 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "description": "Welcome to LinkApp API, official API documentation for the LinkApp platform",
+      "version": "1.0.0",
+      "title": "LinkApp API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "tags": [
+      {
+        "name": "Service API",
+        "description": "Test API"
+      }
+    ],
+     "servers": [
+          {
+          "url": "/"
+          }
+      ],
+      "components": {
+        "schemas": {
+            "signup": {
+                "type": "object",
+                "properties": {
+                    "firstname": {
+                    "type": "string"
+                    },
+                    "lastname": {
+                    "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                        },
+                    "email": {
+                        "type":"string"
+                    },
+                    "password": {
+                        "type":"string"
+                    },
+                    "confirm": {
+                        "type":"string"
+                    }
+
+                }
+            },
+            "login": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                    "type": "string"
+                    },
+                    "password": {
+                    "type": "string"
+                    }
+ 
+                }
+            },
+            "Id":{
+                "type" : "string",
+                "properties" : {
+                    "name" : {
+                        "type" : "string"
+                    }
+                }
+            },
+            "page":{
+                "type" : "string",
+                "properties" : {
+                    
+                    "page" : {
+                        "type" : "string"
+                    }
+                }
+            },
+            "group_name":{
+                "type" : "string",
+                "properties" : {
+                    "name" : {
+                        "type" : "string"
+                    }
+                }
+            },
+            "file":{
+                "type" : "object",
+                "properties" : {
+                    "fileName" : {
+                        "type" : "string",
+                        "format": "binary"
+                    }
+                }
+            },
+            "logout":{
+               
+               
+            },
+            "group": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                    "type": "string"
+                    },
+                    "description": {
+                    "type": "string"
+                    }   
+
+                }
+            },
+            "contact": {
+                "type": "object",
+                "properties": {
+                    "firstname": {
+                    "type": "string"
+                    },
+                    "lastname": {
+                    "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                        },
+                    "telephone": {
+                        "type":"string"
+                    },
+                    "address": {
+                        "type":"string"
+                    },
+                    "group_name": {
+                        "type":"string"
+                    }
+
+                }
+            }
+  }
+},
+"paths": {
+    "/v2.0/signup": {
+        "post": {
+        "tags": [
+            "Register as a new user "
+        ],
+        "summary": "User registration",
+        "requestBody": {
+        "description": "This is the endpoint for new users to register unto our platform",
+        "required": true,
+        "content": {
+            "application/json": {
+            "schema": {
+                "$ref": "#/components/schemas/signup"
+                }
+            }
+        }},
+        "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                "$ref": "#/components/schemas/signup"
+                }
+            },
+            "404": {
+                "description": "NOT FOUND",
+                "schema": {
+                "$ref": "#/components/schemas/signup"
+                }
+        }
+        }
+        
+    }
+},
+"/v2.0/login": {
+    "post": {
+    "tags": [
+        "User login"
+    ],
+    "summary": "User Login",
+    "requestBody": {
+    "description": "This is the endpoint for users to login unto our platform",
+    "required": true,
+    "content": {
+        "application/json": {
+        "schema": {
+            "$ref": "#/components/schemas/login"
+            }
+        }
+    }},
+    "responses": {
+        "200": {
+            "description": "OK",
+            "schema": {
+            "$ref": "#/components/schemas/login"
+            }
+        },
+        "404": {
+            "description": "NOT FOUND",
+            "schema": {
+            "$ref": "#/components/schemas/login"
+            }
+    }
+    }
+    
+}
+},
+
+
+
+
+
+
+"/v2.0/logout": {
+    "post": {
+    "tags": [
+        "User logout"
+    ],
+    "summary": "User logout",
+    "requestBody": {
+    "description": "This is the endpoint logging out user",
+    
+    "content": {
+        "application/json": {
+        "schema": {
+            "$ref": "#/components/schemas/logout"
+            }
+        }
+    }},
+    "responses": {
+        "200": {
+            "description": "OK",
+            "schema": {
+            "$ref": "#/components/schemas/logout"
+            }
+        },
+        "404": {
+            "description": "NOT FOUND",
+            "schema": {
+            "$ref": "#/components/schemas/logout"
+            }
+    }
+    }
+    
+}
+},
+"/v2.0/group": {
+    "post": {
+    "tags": [
+        "Create a new group category"
+    ],
+    "summary": "create new contact group",
+    "requestBody": {
+    "description": "Organise contacts under user groups for convenience",
+    "required": true,
+    "content": {
+        "application/json": {
+        "schema": {
+            "$ref": "#/components/schemas/group"
+            }
+        }
+    }},
+    "responses": {
+        "200": {
+            "description": "OK",
+            "schema": {
+            "$ref": "#/components/schemas/group"
+            }
+        },
+        "404": {
+            "description": "NOT FOUND",
+            "schema": {
+            "$ref": "#/components/schemas/group"
+            }
+    },
+    "500":{
+        "description":"No data proveided",
+        "schema": {
+            "$ref": "#/components/schemas/group"
+            }
+    }
+    }
+    
+},
+"get": {
+    "tags": [
+        "Get all group category"
+    ],
+    
+    "summary": "Get all group category",
+    "requestBody": {
+    "description": "view records of all contact group of a logged in accont"
+    
+    },
+    "responses": {
+        "200": {
+            "description": "OK",
+            "schema": {
+            "$ref": "#/components/schemas/group"
+            }
+        },
+        "404": {
+            "description": "NOT FOUND",
+            "schema": {
+            "$ref": "#/components/schemas/group"
+            }
+    },
+    "500":{
+        "description":"No data proveided",
+        "schema": {
+            "$ref": "#/components/schemas/group"
+            }
+    }
+    }
+    
+}
+},
+"/v2.0/group/{id}": {
+    "get": {
+    "tags": [
+        "Get a single group category"
+    ],
+    "parameters":[{
+        "name":"id",
+        "in":"path",
+        "description":"contact group id",
+        "required":true,
+        "type":"string",
+        "schema":{
+            "$ref":"#/components/schemas/Id"
+        }
+    }],
+
+    "summary": "Get single group category",
+    "requestBody": {
+    "description": "view records of a single contact group by providing the group id"
+    
+    },
+    "responses": {
+        "200": {
+            "description": "OK",
+            "schema": {
+            "$ref": "#/components/schemas/group"
+            }
+        },
+        "404": {
+            "description": "NOT FOUND",
+            "schema": {
+            "$ref": "#/components/schemas/group"
+            }
+    },
+    "500":{
+        "description":"No data proveided",
+        "schema": {
+            "$ref": "#/components/schemas/group"
+            }
+    }
+    }
+    
+},
+"put": {
+    "tags": [
+        "Update a group category"
+    ],
+    "parameters":[{
+        "name":"id",
+        "in":"path",
+        "description":"contact group id",
+        "required":true,
+        "type":"string",
+        "schema":{
+            "$ref":"#/components/schemas/Id"
+        }
+    }],
+    
+    "summary": "Update group category",
+    "requestBody": {
+    "description": "update a contact group of a logged in accont",
+    "required": true,
+    "content": {
+        "application/json": {
+        "schema": {
+            "$ref": "#/components/schemas/group"
+            }
+        }
+    }
+    },
+    "responses": {
+        "200": {
+            "description": "OK",
+            "schema": {
+            "$ref": "#/components/schemas/group"
+            }
+        },
+        "404": {
+            "description": "NOT FOUND",
+            "schema": {
+            "$ref": "#/components/schemas/group"
+            }
+    },
+    "500":{
+        "description":"No data proveided",
+        "schema": {
+            "$ref": "#/components/schemas/group"
+            }
+    }
+    }
+    
+},
+"delete": {
+    "tags": [
+        "Delete a group category"
+    ],
+    "parameters":[{
+        "name":"id",
+        "in":"path",
+        "description":"contact group id",
+        "required":true,
+        "type":"string",
+        "schema":{
+            "$ref":"#/components/schemas/Id"
+        }
+    }],
+    
+    "summary": "Delete group category",
+    "requestBody": {
+    "description": "delete a contact group of a logged in accont"
+    },
+    "responses": {
+        "200": {
+            "description": "OK",
+            "schema": {
+            "$ref": "#/components/schemas/group"
+            }
+        },
+        "404": {
+            "description": "NOT FOUND",
+            "schema": {
+            "$ref": "#/components/schemas/group"
+            }
+    },
+    "500":{
+        "description":"No data proveided",
+        "schema": {
+            "$ref": "#/components/schemas/group"
+            }
+    }
+    }
+    
+}
+},
+"/v2.0/contact/{group_name}": {
+    "post": {
+    "tags": [
+        "Bulk upload"
+    ],
+    "parameters":[{
+        "name":"group_name",
+        "in":"path",
+        "description":"contact group name",
+        "required":true,
+        "type":"string",
+        "schema":{
+            "$ref":"#/components/schemas/group_name"
+        }
+    }],
+    "summary": "Bulk upload",
+    "requestBody": {
+    "description": "This is the endpoint uploading bulk contact records in csv format",
+    "required": true,
+    "content": {
+        "multipart/form-data": {
+        "schema": {
+            "$ref": "#/components/schemas/file"
+            }
+        }
+    }},
+    "responses": {
+        "200": {
+            "description": "OK",
+            "schema": {
+            "$ref": "#/components/schemas/contact"
+            }
+        },
+        "404": {
+            "description": "NOT FOUND",
+            "schema": {
+            "$ref": "#/components/schemas/contact"
+            }
+    }
+    }
+    
+}
+},
+"/v2.0/contact": {
+    "post": {
+    "tags": [
+        "Create new contact"
+    ],
+    
+    "summary": "Create new contact",
+    "requestBody": {
+    "description": "This is the endpoint for users to create new contact record",
+    "required": true,
+    "content": {
+        "application/json": {
+        "schema": {
+            "$ref": "#/components/schemas/contact"
+            }
+        }
+    }},
+    "responses": {
+        "200": {
+            "description": "OK",
+            "schema": {
+            "$ref": "#/components/schemas/contact"
+            }
+        },
+        "404": {
+            "description": "NOT FOUND",
+            "schema": {
+            "$ref": "#/components/schemas/contact"
+            }
+    }
+    }
+    
+}
+},
+"/v2.0/contact/{group_name}/{page}": {
+    
+"get": {
+    "tags": [
+        "Get all Contacts"
+    ],
+    "parameters":[{
+        "name":"group_name",
+        "in":"path",
+        "description":"contact group id",
+        "required":true,
+        "type":"string",
+        "schema":{
+            "$ref":"#/components/schemas/group_name"
+        }
+    },
+    {
+        "name":"page",
+        "in":"path",
+        "description":"contact group id",
+        "required":true,
+        "type":"string",
+        "schema":{
+            "$ref":"#/components/schemas/page"
+        }
+    }
+],
+    "summary": "Get all Conact",
+    "requestBody": {
+    "description": "view all contacts of current user"
+    },
+    "responses": {
+        "200": {
+            "description": "OK",
+            "schema": {
+            "$ref": "#/components/schemas/contact"
+            }
+        },
+        "404": {
+            "description": "NOT FOUND",
+            "schema": {
+            "$ref": "#/components/schemas/contact"
+            }
+    }
+    }
+    
+}
+},
+"/v2.0/contact/{id}": {
+    "get": {
+    "tags": [
+        "Get single Contact"
+    ],
+    "parameters":[{
+        "name":"id",
+        "in":"path",
+        "description":"contact id",
+        "required":true,
+        "type":"string",
+        "schema":{
+            "$ref":"#/components/schemas/Id"
+        }
+    }],
+    "summary": "Get single Conact",
+    "requestBody": {
+    "description": "view records of a single contact by providing the contact id"},
+    "responses": {
+        "200": {
+            "description": "OK",
+            "schema": {
+            "$ref": "#/components/schemas/contact"
+            }
+        },
+        "404": {
+            "description": "NOT FOUND",
+            "schema": {
+            "$ref": "#/components/schemas/contact"
+            }
+    }
+    }
+    
+},
+"put": {
+    "tags": [
+        "Update a single Contact"
+    ],
+    "parameters":[{
+        "name":"id",
+        "in":"path",
+        "description":"contact id",
+        "required":true,
+        "type":"string",
+        "schema":{
+            "$ref":"#/components/schemas/Id"
+        }
+    }],
+    "summary": "Update single Conact",
+    "requestBody": {
+    "description": "update records of a single contact by providing the contact id"
+    ,
+    "required": true,
+    "content": {
+        "application/json": {
+        "schema": {
+            "$ref": "#/components/schemas/contact"
+            }
+        }
+    }
+    },
+    
+    "responses": {
+        "200": {
+            "description": "OK",
+            "schema": {
+            "$ref": "#/components/schemas/contact"
+            }
+        },
+        "404": {
+            "description": "NOT FOUND",
+            "schema": {
+            "$ref": "#/components/schemas/contact"
+            }
+    }
+    }
+    
+},
+"delete": {
+    "tags": [
+        "Delete a single Contact"
+    ],
+    "parameters":[{
+        "name":"id",
+        "in":"path",
+        "description":"contact id",
+        "required":true,
+        "type":"string",
+        "schema":{
+            "$ref":"#/components/schemas/Id"
+        }
+    }],
+    "summary": "Delete single Conact",
+    "requestBody": {
+    "description": "delete records of a single contact by providing the contact id"},
+    "responses": {
+        "200": {
+            "description": "OK",
+            "schema": {
+            "$ref": "#/components/schemas/contact"
+            }
+        },
+        "404": {
+            "description": "NOT FOUND",
+            "schema": {
+            "$ref": "#/components/schemas/contact"
+            }
+    }
+    }
+    
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+}
+
+
+
+
+
+
